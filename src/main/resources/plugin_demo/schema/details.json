@@ -1,0 +1,77 @@
+{
+  "detailsData": [
+    {
+      "key": "instanceId",
+      "name": {
+        "zh": "enterpriseId",
+        "en": "enterpriseId"
+      },
+      "show": false
+    },
+    {
+      "key": "uuid",
+      "name": {
+        "zh": "uuid",
+        "en": "uuid"
+      },
+      "show": false
+    },
+    {
+      "key": "logoUuid",
+      "name": {
+        "zh": "认证源图标",
+        "en": "Authentication Sources Logo"
+      },
+      "show": true
+    },
+    {
+      "key": "enterpriseAuthId",
+      "name": {
+        "zh": "认证源ID",
+        "en": "Authentication Sources ID"
+      },
+      "show": true
+    },
+    {
+      "key": "name",
+      "name": {
+        "zh": "认证源名称",
+        "en": "Authentication Sources Name"
+      },
+      "show": true
+    },
+    {
+      "key": "userLinkingType",
+      "name": {
+        "zh": "用户关联方式",
+        "en": "User Linking"
+      },
+      "type": "userAssociation",
+      "show": true
+    },
+    {
+      "key": "display",
+      "name": {
+        "zh": "是否显示",
+        "en": "Display Application"
+      },
+      "show": true
+    },
+    {
+      "key": "creator",
+      "name": {
+        "zh": "创建人",
+        "en": "Creator"
+      },
+      "show": true
+    },
+    {
+      "key": "createTime",
+      "name": {
+        "zh": "创建时间",
+        "en": "CreateTime"
+      },
+      "show": true
+    }
+  ]
+}

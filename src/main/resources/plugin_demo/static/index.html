@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GitHub Login</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ddtalk login</title>
+    <link rel="stylesheet" href="/frontend/login/static/css/adapterCommon.css" />
+</head>
+
+<body>
+    <div class="login-con" id="FormLogin">
+        <div class="login-body">
+            <p class="app-logo text-center">
+                <img id="appLogo" />
+            </p>
+            <p class="app-name text-center">
+                <span id="appName"></span>
+            </p>
+            <p class="user-name text-center" id="userNameWrap">
+                <span word-key="currentUserTxt"></span><span id="userName"></span>
+            </p>
+
+            <div class="login-box">
+                <form>
+                    <div class="form-group">
+                        <input type="input" class="form-control phone-number" name="username" id="username"
+                            word-key="usernamePlaceholder" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control phone-number" name="password" id="password" type="password"
+                            word-key="passwordPlaceholder" required>
+                    </div>
+
+                    <button type="button" class="btn btn-primary block" onclick="onLogin()">
+                        <span word-key="submit"></span>
+                    </button>
+
+                    <a class="btn btn-default block" href="/frontend/login#/login?defaultAdapter=U_P">
+                        <span word-key="goback"></span>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/public/api/authenticate/plugin_ddtalk/static/js/jquery-3.5.1.js"></script>
+    <script src="/frontend/login/static/js/adapterUtils.js"></script>
+    <script>
+
+        const words = [
+            {
+                key: 'currentUserTxt',
+                zh: '当前认证用户：',
+                en: 'Current user: '
+            },
+            {
+                key: 'usernamePlaceholder',
+                zh: '请输入用户名',
+                en: 'Enter the user name'
+            },
+            {
+                key: 'passwordPlaceholder',
+                zh: '请输入密码',
+                en: 'Enter the password'
+            },
+            {
+                key: 'submit',
+                zh: '提交',
+                en: 'Submit'
+            },
+            {
+                key: 'goback',
+                zh: '返回',
+                en: 'Go back'
+            }
+        ]
+        //设置文案
+        Utils.setWords(words);
+        function getQueryVariable(variable) {
+            var query = window.location.href.substring(window.location.href.indexOf("?") + 1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) {
+                    return pair[1];
+                }
+            }
+            return (false);
+        }
+
+        function onLogin() {
+            $.ajax({
+                type: "POST",
+                url: "/public/api/authenticate/plugin_demo/login",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    "enterpriseAuthId": getQueryVariable("enterpriseAuthId"),
+                    "traceId": getQueryVariable("traceId"),
+                    "username": $("#username").val(),
+                    "password": $("#password").val()
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.success) {
+                        window.location.href = data.frontendAdapterAddress + "?enterpriseAuthId=" + getQueryVariable("enterpriseAuthId") + "&traceId=" + getQueryVariable("traceId");
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function () {
+                    alert("提交数据失败");
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
